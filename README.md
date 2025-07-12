@@ -51,7 +51,7 @@ This project delivers **6 interactive dashboards**, each tackling a different **
 ---
 
 ### 1️⃣ Sales Overview
-![Sales Overview](images/sales-overview.png)
+![Sales Overview](Dashboards/Sales-Overview.png)
 
 **Key Findings:**
 - Strong holiday spike in **November**; revenue peaks near £1.9M.
