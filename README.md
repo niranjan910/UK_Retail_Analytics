@@ -46,12 +46,11 @@ Key actions taken to clean & prepare the data for analysis:
 ## 📊 Dashboards & Key Analysis
 
 This project delivers **6 interactive dashboards**, each tackling a different **business goal**.
-👉 Dashboard images live in the `images/` folder. *(Replace sample paths once added!)*
 
 ---
 
-### 1️⃣ Sales Overview
-![Sales Overview](Dashboards/Sales-Overview.png)
+### 1️⃣ Sales Overview  
+![Sales Overview](Dashboards/Sales%20Overview.png)
 
 **Key Findings:**
 - Strong holiday spike in **November**; revenue peaks near £1.9M.
@@ -61,8 +60,8 @@ This project delivers **6 interactive dashboards**, each tackling a different **
 
 ---
 
-### 2️⃣ Cancellations & Returns
-![Returns & Cancellations](images/returns-cancellations.png)
+### 2️⃣ Cancellations & Returns  
+![Returns & Cancellations](Dashboards/Return%20&%20Cancellation.png)
 
 **Key Findings:**
 - Overall cancellation/return rates are very low (~1%).
@@ -72,8 +71,8 @@ This project delivers **6 interactive dashboards**, each tackling a different **
 
 ---
 
-### 3️⃣ Order Patterns
-![Order Patterns](images/order-patterns.png)
+### 3️⃣ Order Patterns  
+![Order Patterns](Dashboards/Order%20Pattern.png)
 
 **Key Findings:**
 - Order volumes peak in **November (~3.7K orders)**.
@@ -83,8 +82,8 @@ This project delivers **6 interactive dashboards**, each tackling a different **
 
 ---
 
-### 4️⃣ Customer Insights
-![Customer Insights](images/customer-insights.png)
+### 4️⃣ Customer Insights  
+![Customer Insights](Dashboards/Customer%20Insight.png)
 
 **Key Findings:**
 - **High-value customers (37%) generate 80%+ of revenue.**
@@ -94,8 +93,8 @@ This project delivers **6 interactive dashboards**, each tackling a different **
 
 ---
 
-### 5️⃣ Geographic Sales
-![Geographic Sales](images/geographic-sales.png)
+### 5️⃣ Geographic Sales  
+![Geographic Sales](Dashboards/Geographic%20sales.png)
 
 **Key Findings:**
 - **UK = 84%** of total revenue.
@@ -105,8 +104,8 @@ This project delivers **6 interactive dashboards**, each tackling a different **
 
 ---
 
-### 6️⃣ Product Performance
-![Product Performance](images/product-performance.png)
+### 6️⃣ Product Performance  
+![Product Performance](Dashboards/Product%20Performance.png)
 
 **Key Findings:**
 - **3,900+ unique products** sold — wide range.
@@ -144,4 +143,4 @@ This repo is a **complete end-to-end Power BI analytics showcase**, ideal for st
 
 ---
 
-**Enjoy exploring — and feel free to fork or build on it!**
+**Enjoy exploring — and feel free to fork or build on it! 🚀**
