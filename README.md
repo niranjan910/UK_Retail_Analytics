@@ -1,4 +1,86 @@
-# 🛍️ UK Online Retail Analytics (2010–2011)
+# UK Online Retail Analytics (2010–2011)
+
+`Business Problem`
+An online retail company is struggling to improve revenue and customer retention. While they have large ammount of transactional data, they lack insights into which products drive sales which customer are most valuable and how purchasing patterns vary across regions and time.
+
+The company wants to answer critical questions:
+1. Who are the most valuable customers and how do we retain them?
+2. Which products and categories generate the highest revenue and which products often seel together?
+3. What are the seasonal or monthly sales patterns and how can inventory be managed accordingly?
+4. Which markets (countries) should we focous for the expansion or targeted promotions?
+5. How do we returns and cancellations (negative quantities) affect overall revenue?
+
+`Data Loading`
+This data set is taken from UCI and it consists of total 541909 rows and 8 columns 
+- The name of all the rows are - `InvoiceNo`,`StockCode`,`Description`,`Quantity`,`InvoiceDate`,`UnitPrice`,`CustomerID`,`Country`
+- The Data Types of each Columns are as -
+1. `InvoiceNo`              object
+2. `StockCode`              object
+3. `Description`            object
+4. `Quantity`                int64
+5. `InvoiceDate`    datetime64[ns]
+6. `UnitPrice`             float64
+7. `CustomerID`            float64
+8. `Country`                object
+- The number of missing values in each column is -
+1. `InvoiceNo`              0
+2. `StockCode`              0
+3. `Description`            1454
+4. `Quantity`               0
+5. `InvoiceDate`            0 
+6. `UnitPrice`              0
+7. `CustomerID`             135080
+8. `Country`                0
+
+`Data Exploration`
+- `InvoiceNo`
+1. **Basic Characteristics**
+   - Total rows: **541,909**
+   - Unique invoices: **25,900**
+   - No missing values
+   - Data type: `object`
+
+2. **Duplicates**
+   - Found **20,378 rows** where the same `InvoiceNo` and `StockCode` appear multiple times.  
+   - This may indicate **duplicate entries** or cases where the same product was billed in separate lines.
+
+3. **Cancellations**
+   - Cancelled invoices are identified by an `InvoiceNo` starting with **"C"**.
+   - Total cancelled invoices: **3,836**
+   - Total cancelled rows: **9,288**
+   - Business Insight: Cancellations represent **~14.8%** of all invoices (3836 / 25900), which is significant and should be accounted for in revenue calculations.
+
+4. **Invoice Number Format**
+   - Invoice length is consistent: **6 digits** for most records, with a few having **7 digits**.
+   - Non-numeric invoices (all cancellations) detected, e.g. `C536379`, `C536383`.
+
+5. **Basket Size (Items per Invoice)**
+   - Average items per invoice: **20.5**
+   - Median items per invoice: **10**
+   - Minimum items per invoice: **1**
+   - Maximum items per invoice: **1110**
+   - Business Insight: Most customers purchase a small number of items, but some bulk orders exist (possible B2B clients).
+
+6. **Quantity & Revenue per Invoice**
+   - Average quantity per invoice: **~200**
+   - Average revenue per invoice: **~£376**
+   - Revenue ranges widely from **-£168,469** (due to cancellations/returns) to **£168,469**.
+   - Business Insight: Negative revenues highlight the impact of cancellations/returns and must be adjusted for accurate sales reporting.
+
+7. **Invoices per Customer**
+   - Total unique customers: **4,372**
+   - Average invoices per customer: **5.07**
+   - Median invoices per customer: **3**
+   - Some customers placed **up to 248 invoices**.
+   - Business Insight: Indicates **loyal/repeat customers** and provides a base for **RFM analysis**.
+
+8. **Invoices per Day**
+   - Total active days: **305**
+   - Average invoices per day: **~85**
+   - Peak day: **218 invoices**
+   - Business Insight: Sales activity varies by day, and daily trends can guide **inventory planning**.
+
+
 
 This project analyzes a real-world **UK online retail dataset** containing **540,000+ transactions** from Dec 2010 to Dec 2011.  
 The goal is to transform messy raw data into **clear business insights** through **data cleaning**, **DAX measures**, **visual analysis**, and **interactive Power BI dashboards**.
