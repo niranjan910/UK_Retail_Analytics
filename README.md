@@ -1,5 +1,18 @@
 # UK Online Retail Analytics (2010–2011)
 
+This project follows the principle of the **Capstone / Data Analytics Methodology**, which involves the following steps:
+
+1. `Business Problem Understanding` – Defining the real-world challenge and project objectives.  
+2. `Data Loading` – Importing the dataset into the analysis environment (Excel, Python, SQL, etc.).  
+3. `Data Understanding` – Exploring dataset structure, column types, shape, and missing values.  
+4. `Data Exploration` – Performing column-level checks, distributions, and identifying anomalies.  
+5. `Data Cleaning` – Handling missing values, duplicates, outliers, and inconsistencies.  
+6. `Feature Engineering` – Creating new variables (e.g., Revenue, InvoiceMonth, flags for cancellations).  
+7. `Data Analysis` – Aggregating and summarizing data to extract business insights.  
+8. `EDA (Exploratory Data Analysis)` – Visualizing patterns, trends, and relationships using plots/charts.  
+9. `Final Report / Storytelling` – Presenting findings through dashboards, reports, and business recommendations.  
+
+
 `Business Problem`
 An online retail company is struggling to improve revenue and customer retention. While they have large ammount of transactional data, they lack insights into which products drive sales which customer are most valuable and how purchasing patterns vary across regions and time.
 
