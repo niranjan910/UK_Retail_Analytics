@@ -110,7 +110,25 @@ This data set is taken from UCI and it consists of total 541909 rows and 8 colum
 
 ----
 
+- `DEscription`
+**Observations (Summary):**
+- Datatype: `object`, Total Rows: 541,909, Unique Values: 1,454  
+- No missing values overall, but some `StockCodes` have missing/blank descriptions  
+- Text length: mostly **23–31 characters** (max = 35)  
+- Top descriptions: `WHITE HANGING HEART T-LIGHT HOLDER`, `REGENCY CAKESTAND 3 TIER`, `JUMBO BAG RED RETROSPOT`  
+- Rare/erroneous descriptions include: `"Display"`, `"Missing"`, `"historic computer difference?....se"`  
+- Around **55,302 descriptions** contain special characters (e.g., dots, symbols)  
+- Several `StockCodes` map to **multiple different descriptions** (e.g., `20713`, `23084`, `85175`)  
 
+---
+
+**Steps for Data Cleaning**
+1. **Handle missing descriptions** → Impute using `StockCode` mapping or remove if invalid  
+2. **Standardize text** → Convert to uppercase, strip whitespace  
+3. **Remove/replace erroneous entries** (e.g., `"Missing"`, `"Display"`, gibberish text)  
+4. **Clean special characters** (retain only meaningful alphanumeric text)  
+5. **Resolve StockCode–Description conflicts** → keep the most frequent/valid mapping  
+6. Optionally perform **text preprocessing** (remove stopwords, lemmatization) for product categorization  
 
 
 
