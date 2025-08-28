@@ -110,7 +110,7 @@ This data set is taken from UCI and it consists of total 541909 rows and 8 colum
 
 ----
 
-- `DEscription`
+- `Description`
 **Observations (Summary):**
 - Datatype: `object`, Total Rows: 541,909, Unique Values: 1,454  
 - No missing values overall, but some `StockCodes` have missing/blank descriptions  
@@ -120,8 +120,6 @@ This data set is taken from UCI and it consists of total 541909 rows and 8 colum
 - Around **55,302 descriptions** contain special characters (e.g., dots, symbols)  
 - Several `StockCodes` map to **multiple different descriptions** (e.g., `20713`, `23084`, `85175`)  
 
----
-
 **Steps for Data Cleaning**
 1. **Handle missing descriptions** → Impute using `StockCode` mapping or remove if invalid  
 2. **Standardize text** → Convert to uppercase, strip whitespace  
@@ -129,6 +127,31 @@ This data set is taken from UCI and it consists of total 541909 rows and 8 colum
 4. **Clean special characters** (retain only meaningful alphanumeric text)  
 5. **Resolve StockCode–Description conflicts** → keep the most frequent/valid mapping  
 6. Optionally perform **text preprocessing** (remove stopwords, lemmatization) for product categorization  
+
+---
+
+`Quantity`
+**Observations (Summary):**
+- Datatype: `int64`, Total Rows: 541,909, Unique Values: 722  
+- No missing values detected  
+- Distribution shows heavy skew with extreme outliers  
+- Typical range:  
+  - 25% = 1, Median = 3, 75% = 10  
+  - Mean = ~9.55 (much higher std = 218.08)  
+- Values range from **-80,995 to +80,995**  
+- **Negative quantities** detected → 10,624 rows (likely returns/cancellations)  
+- **Zero quantities** → none  
+- **Most frequent quantities**: 1, 2, 12, 6, 4, 3, 24, 10  
+- **Extreme outliers**: 4,950 rows > 99th percentile (Quantity > 100)  
+
+**Steps for Data Cleaning**
+1. Validate negative quantities — decide whether to keep (for returns) or separate them.  
+2. Check for erroneous extreme values (e.g., `Quantity = 80,995`) and cap/remove if invalid.  
+3. Ensure `Quantity` > 0 for normal sales records.  
+4. Investigate unusual bulk quantities (top outliers) for possible data entry errors.  
+5. Standardize handling of returns (negative values) in further analysis.  
+
+---
 
 
 
