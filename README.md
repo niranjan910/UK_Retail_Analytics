@@ -12,8 +12,27 @@ This project follows the principle of the **Capstone / Data Analytics Methodolog
 8. `EDA (Exploratory Data Analysis)` – Visualizing patterns, trends, and relationships using plots/charts.  
 9. `Final Report / Storytelling` – Presenting findings through dashboards, reports, and business recommendations.  
 
+---
 
-`Business Problem`
+## Dataset Overview
+
+The dataset captures all sales orders for one year.  
+Each row = **one product line** on an invoice.
+
+| Column Name     | Description                                                                          |
+|-----------------|--------------------------------------------------------------------------------------|
+| `InvoiceNo`     | Unique order ID — if it starts with 'C', the invoice was cancelled.                  |
+| `StockCode`     | Product/item code.                                                                   |
+| `Description`   | Name or short description of the product.                                            |
+| `Quantity`      | Number of units ordered. Negative = returned.                                        |
+| `InvoiceDate`   | Date and timestamp when the order was placed.                                        |
+| `UnitPrice`     | Price per unit (GBP).                                                                |
+| `CustomerID`    | Unique customer ID. Some transactions have missing IDs.                              |
+| `Country`       | Customer’s country.                                                                  |
+
+---
+
+## `Business Problem`
 An online retail company is struggling to improve revenue and customer retention. While they have large ammount of transactional data, they lack insights into which products drive sales which customer are most valuable and how purchasing patterns vary across regions and time.
 
 The company wants to answer critical questions:
@@ -23,7 +42,9 @@ The company wants to answer critical questions:
 4. Which markets (countries) should we focous for the expansion or targeted promotions?
 5. How do we returns and cancellations (negative quantities) affect overall revenue?
 
-`Data Loading`
+---
+
+## `Data Loading`
 This data set is taken from UCI and it consists of total 541909 rows and 8 columns 
 - The name of all the rows are - `InvoiceNo`,`StockCode`,`Description`,`Quantity`,`InvoiceDate`,`UnitPrice`,`CustomerID`,`Country`
 - The Data Types of each Columns are as -
@@ -45,53 +66,58 @@ This data set is taken from UCI and it consists of total 541909 rows and 8 colum
 7. `CustomerID`             135080
 8. `Country`                0
 
-`Data Exploration`
+---
+
+## `Data Exploration`
 - `InvoiceNo`
-1. **Basic Characteristics**
-   - Total rows: **541,909**
-   - Unique invoices: **25,900**
-   - No missing values
-   - Data type: `object`
 
-2. **Duplicates**
-   - Found **20,378 rows** where the same `InvoiceNo` and `StockCode` appear multiple times.  
-   - This may indicate **duplicate entries** or cases where the same product was billed in separate lines.
+**Observations (Summary):**
+- Datatype: `object`, Total Rows: 541,909, Unique: 25,900  
+- No missing values detected  
+- Duplicate InvoiceNo–StockCode combinations present (~20,378 rows)  
+- Cancelled invoices identified (prefix `"C"`) → 3,836 invoices, 9,288 rows  
+- InvoiceNo length mostly 6 digits, except cancelled ones with 7 characters  
+- Each invoice may contain multiple StockCodes (basket of items)  
+- Distribution of items per invoice is skewed (most invoices have 1–10 items, some with 200+)  
 
-3. **Cancellations**
-   - Cancelled invoices are identified by an `InvoiceNo` starting with **"C"**.
-   - Total cancelled invoices: **3,836**
-   - Total cancelled rows: **9,288**
-   - Business Insight: Cancellations represent **~14.8%** of all invoices (3836 / 25900), which is significant and should be accounted for in revenue calculations.
+**Steps for Data Cleaning**
+1. Ensure `InvoiceNo` is treated as a categorical/string variable  
+2. Separate cancelled invoices (prefix `"C"`) for focused analysis  
+3. Remove duplicate `InvoiceNo–StockCode` rows if redundant  
+4. Validate invoice-level aggregations (total quantity, total revenue)  
+5. Check for unusually large/small invoice sizes (possible outliers)  
+6. Consider creating a new column `IsCancelled` for easier filtering  
 
-4. **Invoice Number Format**
-   - Invoice length is consistent: **6 digits** for most records, with a few having **7 digits**.
-   - Non-numeric invoices (all cancellations) detected, e.g. `C536379`, `C536383`.
+----
 
-5. **Basket Size (Items per Invoice)**
-   - Average items per invoice: **20.5**
-   - Median items per invoice: **10**
-   - Minimum items per invoice: **1**
-   - Maximum items per invoice: **1110**
-   - Business Insight: Most customers purchase a small number of items, but some bulk orders exist (possible B2B clients).
+- `StockCode`
+**Observations (Summary):**
+- Datatype: `object`, Total Rows: 541,909, Unique: 25,900  
+- No missing values detected  
+- StockCode length mostly 5–6 characters (max = 12)  
+- Presence of **non-numeric codes** (e.g., `DOT`, `POST`, `BANK CHARGES`) → 54,873 rows  
+- Some StockCodes map to **multiple product descriptions**  
+- Frequent StockCodes: `85123A`, `22423`, `85099B`, `47566`  
+- Top revenue generators: `DOT`, `22423`, `47566`, `85123A`, `85099B`  
 
-6. **Quantity & Revenue per Invoice**
-   - Average quantity per invoice: **~200**
-   - Average revenue per invoice: **~£376**
-   - Revenue ranges widely from **-£168,469** (due to cancellations/returns) to **£168,469**.
-   - Business Insight: Negative revenues highlight the impact of cancellations/returns and must be adjusted for accurate sales reporting.
+**Steps for Data Cleaning**
+1. Convert all StockCodes to string & uppercase  
+2. Handle/remove special codes (e.g., `DOT`, `POST`, `BANK CHARGES`)  
+3. Standardize inconsistent cases (e.g., `47591b` → `47591B`)  
+4. Flag/handle very rare StockCodes (appearing once)  
+5. Resolve cases where a StockCode maps to multiple descriptions  
+6. Validate StockCode–Description mapping with Quantity/Revenue  
 
-7. **Invoices per Customer**
-   - Total unique customers: **4,372**
-   - Average invoices per customer: **5.07**
-   - Median invoices per customer: **3**
-   - Some customers placed **up to 248 invoices**.
-   - Business Insight: Indicates **loyal/repeat customers** and provides a base for **RFM analysis**.
+----
 
-8. **Invoices per Day**
-   - Total active days: **305**
-   - Average invoices per day: **~85**
-   - Peak day: **218 invoices**
-   - Business Insight: Sales activity varies by day, and daily trends can guide **inventory planning**.
+
+
+
+
+
+
+
+
 
 
 
@@ -104,25 +130,7 @@ It answers key business questions, such as:
 - 👥 Who are our most valuable customers?
 - 🌍 Where are we selling the most — and where can we grow next?
 
----
 
-## 📂 Dataset Overview
-
-The dataset captures all sales orders for one year.  
-Each row = **one product line** on an invoice.
-
-| Column Name     | Description                                                                          |
-|-----------------|--------------------------------------------------------------------------------------|
-| `InvoiceNo`     | Unique order ID — if it starts with 'C', the invoice was cancelled.                  |
-| `StockCode`     | Product/item code.                                                                   |
-| `Description`   | Name or short description of the product.                                            |
-| `Quantity`      | Number of units ordered. Negative = returned.                                        |
-| `InvoiceDate`   | Date and timestamp when the order was placed.                                        |
-| `UnitPrice`     | Price per unit (GBP).                                                                |
-| `CustomerID`    | Unique customer ID. Some transactions have missing IDs.                              |
-| `Country`       | Customer’s country.                                                                  |
-
----
 
 ## 🧹 Data Cleaning Highlights
 
