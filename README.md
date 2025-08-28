@@ -153,6 +153,42 @@ This data set is taken from UCI and it consists of total 541909 rows and 8 colum
 
 ---
 
+`InvoiceDate`
+**Observations (Summary):**
+- Datatype: `datetime64[ns]`, Total Rows: 541,909, Missing Values: 0  
+- Unique Values: 23,260  
+- Sample Values:  
+  - `2011-06-21 16:35:00`, `2011-11-22 15:41:00`, `2011-11-29 15:06:00`  
+- Date Range: **2010-12-01 08:26:00 → 2011-12-09 12:50:00**  
+- Invalid/Coerced NaT values: 0  
+
+**Extracted Components:**  
+- Year, Month, Day, Hour, Weekday successfully extracted for temporal analysis.  
+- Sample:  
+  - Year = 2010, Month = 12, Day = 1, Hour = 8, Weekday = Wednesday  
+
+**Transaction Distribution:**  
+- **By Year** → 2010: 42,481, 2011: 499,428  
+- **By Month** → Peak in Nov (84,711), followed by Dec (68,006), Oct (60,742)  
+- **By Weekday** → Thursday (103,857) & Tuesday (101,808) highest, Friday lower (82,193)  
+- **By Hour** → Sales peak between **10 AM – 4 PM** (most transactions at 12–3 PM)  
+
+**Steps for Data Cleaning / Preparation**  
+1. Ensure all timestamps are in proper `datetime64[ns]` format.  
+2. Check for **time-zone consistency** (if data comes from multiple regions).  
+3. Flag any **future/past outliers** beyond business period.  
+4. Standardize to **local business hours** if needed.  
+5. Handle **partial day coverage** (e.g., very low transactions at 6–7 AM, 8 PM onwards).  
+
+**Next Steps for Data Analysis**  
+1. **Seasonality Analysis** → monthly/weekly sales trends.  
+2. **Peak Hours Identification** → focus promotions during 10 AM – 4 PM.  
+3. **Day-of-Week Impact** → compare weekday vs. weekend sales performance.  
+4. **Year-over-Year Growth** → evaluate 2010 → 2011 growth.  
+5. **Holiday / Event Impact** → investigate spikes in Nov–Dec (holiday shopping).  
+6. Create **time-series plots** (line plots, heatmaps by weekday-hour).  
+
+---
 
 
 
